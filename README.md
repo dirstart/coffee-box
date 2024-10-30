@@ -2,6 +2,9 @@
 
 ![](./image.png)
 ![](./image-1.png)
+![](image-2.png)
+![](image-3.png)
+![](image-4.png)
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
