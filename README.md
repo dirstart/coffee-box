@@ -9,6 +9,7 @@
 ![](image-6.png)
 ![](image-7.png)
 ![](image-8.png)
+![](image-9.png)
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
