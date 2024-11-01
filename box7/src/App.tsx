@@ -86,6 +86,13 @@ export function App() {
                 >
                   图形问答
                 </button>
+
+                <button
+                  onClick={() => handleModeSelect('visual')}
+                  className="w-full bg-luckin-50 text-luckin-700 py-3 rounded-lg font-medium hover:bg-luckin-200 transition-colors"
+                >
+                  语音问答
+                </button>
                 <button
                   onClick={() => handleModeSelect('random')}
                   className="w-full border-2 border-luckin-200 text-luckin-600 py-3 rounded-lg font-medium hover:bg-luckin-50 transition-colors"
