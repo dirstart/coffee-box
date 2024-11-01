@@ -1,6 +1,6 @@
 // api.ts
 const apiUrl = 'https://aigcapi.lkcoffee.com/v1/chat-messages';
-const apiKey = 'app-BSpWVsLQdeEkrUiaVxXvL151';
+const apiKey = 'app-orR6C3Sv2Yj3m38lrOK0jYEX';
 
 interface FetchAIResponseParams {
     userQuestion: string;
