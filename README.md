@@ -1,18 +1,18 @@
 # Coffee Box
 
-![](./image.png)
-![](./image-1.png)
-![](image-2.png)
-![](image-3.png)
-![](image-4.png)
-![](image-5.png)
-![](image-6.png)
-![](image-7.png)
-![](image-8.png)
-![](image-9.png)
-![](image-10.png)
-![](image-11.png)
-![](image-12.png)
+![](./img/image.png)
+![](./img/image-1.png)
+![](./img/image-2.png)
+![](./img/image-3.png)
+![](./img/image-4.png)
+![](./img/image-5.png)
+![](./img/image-6.png)
+![](./img/image-7.png)
+![](./img/image-8.png)
+![](./img/image-9.png)
+![](./img/image-10.png)
+![](./img/image-11.png)
+![](./img/image-12.png)
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
