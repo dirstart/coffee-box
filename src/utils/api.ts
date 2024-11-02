@@ -4,17 +4,15 @@ const apiKey = 'app-orR6C3Sv2Yj3m38lrOK0jYEX';
 
 interface FetchAIResponseParams {
     userQuestion: string;
-    setAnswer: React.Dispatch<React.SetStateAction<string>>;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const fetchAIResponse = async ({
     userQuestion,
-    setAnswer,
     setLoading
-}: FetchAIResponseParams): Promise<void> => {
+}: FetchAIResponseParams): Promise<string> => {
     setLoading(true);
-    setAnswer('');
+    let answer = '';
 
     try {
         const response = await fetch(apiUrl, {
@@ -51,15 +49,13 @@ export const fetchAIResponse = async ({
                     try {
                         const data = JSON.parse(jsonString);
 
-                        if (data.event === "message") {
-                            setAnswer((prev) => prev + data.answer);
-                        } else if (data.event === "agent_message") {
-                            setAnswer((prev) => prev + data.answer);
-                        } else if (data.event === "message_file") {
-                            console.log("File event:", data.url);
+                        if (data.event === "message" || data.event === "agent_message") {
+                            answer += data.answer;
                         } else if (data.event === "message_end") {
                             setLoading(false);
-                            return;
+                            return answer; // 返回完整的回答
+                        } else if (data.event === "message_file") {
+                            console.log("File event:", data.url);
                         } else if (data.event === "agent_thought") {
                             console.log("Agent thought:", data.thought);
                         }
@@ -70,9 +66,10 @@ export const fetchAIResponse = async ({
             }
         }
         setLoading(false);
+        return answer; // 确保在结束时返回答案
     } catch (error) {
         console.error("Error fetching AI response:", error);
-        setAnswer("对不起，获取答案时发生错误。");
         setLoading(false);
+        return "对不起，获取答案时发生错误。";
     }
 };
