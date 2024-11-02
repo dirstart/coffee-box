@@ -7,15 +7,12 @@ const AIChat: React.FC = () => {
     const [answer, setAnswer] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (question.trim()) {
-            fetchAIResponse({
-                userQuestion: question,
-                setAnswer,
-                setLoading
-            });
-            setQuestion(''); // 清空输入框
+          const answer = await fetchAIResponse({ userQuestion: question, setLoading });
+          setAnswer(answer);
+          setQuestion(''); // 清空输入框
         }
     };
 

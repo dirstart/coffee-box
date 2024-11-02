@@ -3,6 +3,7 @@ import { ArrowLeft, Coffee, Loader2 } from 'lucide-react';
 import { CoffeeRecommendation } from '../types';
 import { coffeeRecommendations } from '../data/coffeeData';
 import { BrewingAnimation } from './BrewingAnimation';
+import { fetchAIResponse } from '../utils/api';
 
 interface Props {
   onRecommendation: (rec: CoffeeRecommendation) => void;
@@ -11,9 +12,13 @@ interface Props {
 
 export function RandomCoffee({ onRecommendation, onBack }: Props) {
   const [loading, setLoading] = useState(false);
+  const [answer, setAnswer] = useState('');
+  console.log("🚀 ~ file: RandomCoffee.tsx:16 ~ RandomCoffee ~ answer:", answer)
 
-  const getRandomCoffee = () => {
+  const getRandomCoffee = async () => {
     setLoading(true);
+    const answer = await fetchAIResponse({ userQuestion: '随机推荐', setLoading });
+    setAnswer(answer);
     
     // Simulate API delay for better UX
     setTimeout(() => {
