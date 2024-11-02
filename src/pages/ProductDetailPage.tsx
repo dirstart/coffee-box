@@ -66,7 +66,7 @@ const ProductDetailPage: React.FC = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative aspect-[4/3] md:aspect-[16/9] rounded-2xl bg-white shadow-lg overflow-hidden"
+          className="relative aspect-square rounded-2xl bg-white shadow-lg overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent" />
           <img
