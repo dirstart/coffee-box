@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Search, X, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Search, X, ChevronRight, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getProductTags } from '../data/productTags';
 import { categoryProducts } from '../data/categoryProducts';
@@ -20,6 +20,15 @@ const CategoryPage: React.FC = () => {
     };
     return categoryNames[id] || '商品';
   };
+
+  const nutritionLabels = [
+    { label: 'GI值', unit: '', description: '血糖生成指数' },
+    { label: '热量', unit: 'kcal', description: '每100ml的能量' },
+    { label: '蛋白质', unit: 'g', description: '每100ml的蛋白质含量' },
+    { label: '反式脂肪', unit: 'g', description: '每100ml的反式脂肪含量' },
+    { label: '碳水', unit: 'g', description: '每100ml的碳水化合物含量' },
+    { label: '脂肪', unit: 'g', description: '每100ml的脂肪含量' }
+  ];
 
   const filteredProducts = useMemo(() => {
     const products = categoryProducts[categoryId] || [];
@@ -44,10 +53,18 @@ const CategoryPage: React.FC = () => {
                 <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 text-white group-hover:-translate-x-0.5 transition-transform" />
               </button>
               <div className="ml-3 md:ml-4 flex-1 flex items-center gap-2 md:gap-4 overflow-x-auto py-2 scrollbar-hide">
-                {['GI值', '热量', '蛋白质', '脂肪酸', '碳水', '脂肪'].map((header, index) => (
-                  <div key={index} className="flex flex-col items-center flex-shrink-0">
-                    <span className="text-xs md:text-sm font-medium text-white whitespace-nowrap">{header}</span>
-                    <span className="text-[10px] md:text-xs text-blue-100">每100ml</span>
+                {nutritionLabels.map((header, index) => (
+                  <div key={index} className="flex flex-col items-center flex-shrink-0 group relative">
+                    <span className="text-xs md:text-sm font-medium text-white whitespace-nowrap">
+                      {header.label}
+                    </span>
+                    <span className="text-[10px] md:text-xs text-blue-100">
+                      每100ml{header.unit}
+                    </span>
+                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max max-w-[200px] bg-white/95 backdrop-blur-sm text-gray-700 text-xs rounded-lg px-3 py-2 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                      {header.description}
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-white"></div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -155,16 +172,26 @@ const CategoryPage: React.FC = () => {
                       ))}
                     </div>
 
-                    <div className="mt-2 flex items-center gap-3 md:gap-4 text-sm md:text-base text-gray-900">
-                      <span>35</span>
-                      <span>130</span>
-                      <span>6.8</span>
-                      <span>0</span>
-                      <span>10.2</span>
-                      <span>7.1</span>
+                    {/* Nutrition Values */}
+                    <div className="mt-3 grid grid-cols-3 gap-2">
+                      {[35, 130, 6.8, 0, 10.2, 7.1].map((value, index) => (
+                        <div key={index} className="bg-gray-50 rounded-lg p-2 group relative">
+                          <div className="text-center">
+                            <div className="text-xs text-gray-500">{nutritionLabels[index].label}</div>
+                            <div className="text-sm font-medium text-gray-900">
+                              {value}{nutritionLabels[index].unit}
+                            </div>
+                          </div>
+                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-max max-w-[150px] bg-gray-800 text-white text-xs rounded-lg px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                            {nutritionLabels[index].description}
+                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-gray-800"></div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
+
                     <button 
-                      className="mt-2 md:mt-3 flex items-center text-xs md:text-sm text-[#4080ff] hover:text-[#3575ff] transition-colors"
+                      className="mt-3 flex items-center text-xs md:text-sm text-[#4080ff] hover:text-[#3575ff] transition-colors"
                       onClick={() => navigate(`/product/${product.productId}`)}
                     >
                       <span>查看详情</span>
