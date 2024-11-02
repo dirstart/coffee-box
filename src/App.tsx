@@ -5,6 +5,7 @@ import { CoffeeDetails } from './components/CoffeeRecommendation';
 import { RandomCoffee } from './components/RandomCoffee';
 import { CoffeeRecommendation } from './types';
 import { Bot, Sparkles } from 'lucide-react';
+import  AIChat from './components/AiChat';
 
 export function App() {
   const [mode, setMode] = useState<'text' | 'visual' | 'random' | null>(null);
@@ -99,6 +100,7 @@ export function App() {
                 >
                   随机推荐
                 </button>
+                <AIChat />
               </div>
             </div>
           </div>
