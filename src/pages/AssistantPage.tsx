@@ -46,11 +46,20 @@ const AssistantPage: React.FC = () => {
       return (
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="bg-[#4080ff] p-4">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <button
+                  onClick={handleBack}
+                  className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300"
+                  aria-label="返回"
+                >
+                  <ArrowLeft className="w-4 h-4 text-white" />
+                </button>
+                <h1 className="text-xl font-bold text-white">咖啡营养助手</h1>
+              </div>
               <div className="bg-white p-2 rounded-full">
                 <Bot className="w-6 h-6 text-[#4080ff]" />
               </div>
-              <h1 className="text-xl font-bold text-white">咖啡营养助手</h1>
             </div>
           </div>
           
@@ -127,23 +136,6 @@ const AssistantPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#4080ff]/5 to-white">
       <div className="max-w-md mx-auto">
-        {/* Header */}
-        <div className="bg-white shadow-sm">
-          <div className="px-4 py-3 flex items-center justify-between">
-            <button
-              onClick={handleBack}
-              className="flex items-center space-x-2 px-3 py-1.5 text-gray-600 hover:text-[#4080ff] rounded-lg hover:bg-[#4080ff]/5 transition-all duration-300"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="font-medium">返回</span>
-            </button>
-            <div className="flex items-center space-x-2 text-[#4080ff]">
-              <Bot className="w-5 h-5" />
-              <span className="font-medium">咖啡助手</span>
-            </div>
-          </div>
-        </div>
-        
         {/* Main Content */}
         <div className="p-4">
           {renderContent()}
