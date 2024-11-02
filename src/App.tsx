@@ -1,8 +1,8 @@
 import React from 'react';
 import CategoryGrid from './components/CategoryGrid';
 import HealthTips from './components/HealthTips';
-import AIAssistant from './components/AIAssistant';
 import NutritionFacts from './components/NutritionFacts';
+import AIAssistant from './components/AIAssistant';
 import { Coffee, Leaf, Waves } from 'lucide-react';
 
 const categories = {
@@ -21,7 +21,7 @@ const categories = {
     },
     {
       "categoryId": "100380",
-      "categoryName": "生椰系列", 
+      "categoryName": "生椰系列",
       "categoryIcon": "https://img03.luckincoffeecdn.com/group3/M00/2E/42/CtxgFGa45fCACCY8AAASfK7FI2M531.png",
       "products": []
     },
@@ -87,7 +87,9 @@ const App: React.FC = () => {
         <CategoryGrid categories={categories.categories} />
         <NutritionFacts />
         <HealthTips />
-        <AIAssistant />
+        <div className="mt-4">
+          <AIAssistant />
+        </div>
       </main>
 
       {/* Footer */}

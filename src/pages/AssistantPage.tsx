@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Bot, Sparkles } from 'lucide-react';
+import { ArrowLeft, Bot, Sparkles, Send } from 'lucide-react';
 import { TextQA } from '../components/TextQA';
 import { VisualQA } from '../components/VisualQA';
 import { CoffeeDetails } from '../components/CoffeeRecommendation';
@@ -105,6 +105,7 @@ const AssistantPage: React.FC = () => {
               <AIChat />
             </div>
           </div>
+
         </div>
       );
     }
