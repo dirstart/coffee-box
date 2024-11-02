@@ -4,6 +4,8 @@ import { ArrowLeft, Coffee, Heart, Share2, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getProductTags } from '../data/productTags';
 import FlavorProfile from '../components/FlavorProfile';
+import CalorieTable from '../components/CalorieTable';
+import NutritionTable from '../components/NutritionTable';
 
 const ProductDetailPage: React.FC = () => {
   const { productId } = useParams();
@@ -16,18 +18,37 @@ const ProductDetailPage: React.FC = () => {
     image: "https://img05.luckincoffeecdn.com/group3/M00/5E/21/CtxgFGZ76i6AUN1MAAITQmZpPdU211.png",
     description: "醇厚浓郁的意式浓缩咖啡，搭配丝滑奶泡，经典比例完美调配。",
     price: 28,
+    flavor: {
+      data: [4, 3, 5, 2, 4],
+      labels: ['醇厚度', '甜度', '奶香', '酸度', '香气'],
+      notes: ['浓郁咖啡香', '丝滑奶泡', '温和平衡']
+    },
+    calories: {
+      cold: {
+        noSugar: 0,
+        lessSugar: 103,
+        halfSugar: 119,
+        lightSugar: 123,
+        regular: 137
+      },
+      hot: {
+        noSugar: 0,
+        lessSugar: 97,
+        halfSugar: 113,
+        lightSugar: 125,
+        regular: 137
+      }
+    },
     nutrition: {
       gi: 35,
       calories: 130,
       protein: 6.8,
       transFat: 0,
       carbs: 10.2,
-      fat: 7.1
-    },
-    flavor: {
-      data: [4, 3, 5, 2, 4],
-      labels: ['醇厚度', '甜度', '奶香', '酸度', '香气'],
-      notes: ['浓郁咖啡香', '丝滑奶泡', '温和平衡']
+      fat: 7.1,
+      caffeine: 95,
+      sodium: 120,
+      calcium: 150
     },
     recommendations: [
       { name: "榛果口味", price: 3 },
@@ -37,7 +58,7 @@ const ProductDetailPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f8faff] to-white">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8faff] to-white pb-[72px]">
       {/* 顶部导航栏 */}
       <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-2xl mx-auto px-4">
@@ -61,50 +82,53 @@ const ProductDetailPage: React.FC = () => {
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-6">
-        {/* 商品主图 */}
+        {/* 商品基本信息 */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative aspect-square rounded-2xl bg-white shadow-lg overflow-hidden"
+          className="flex gap-4 bg-white rounded-xl p-4 shadow-sm"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent" />
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-contain p-8"
-          />
+          {/* 商品图片 */}
+          <div className="w-32 h-32 flex-shrink-0 rounded-lg bg-gradient-to-br from-blue-50/50 to-transparent overflow-hidden">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-contain p-2"
+            />
+          </div>
+          
+          {/* 商品信息 */}
+          <div className="flex-1 min-w-0">
+            <h1 className="text-xl font-bold text-gray-900">{product.name}</h1>
+            <p className="text-sm text-gray-500 mt-0.5">{product.englishName}</p>
+            
+            {/* 标签 */}
+            <div className="flex flex-wrap gap-1.5 mt-2">
+              {getProductTags(productId || "117").map((tag) => (
+                <span
+                  key={tag.id}
+                  className={`px-2 py-0.5 rounded-full text-xs ${tag.backgroundColor} ${tag.color}`}
+                >
+                  {tag.name}
+                </span>
+              ))}
+            </div>
+
+            {/* 价格 */}
+            <div className="mt-3 flex items-center justify-between">
+              <p className="text-gray-600 text-sm">{product.description}</p>
+              <span className="text-lg font-bold text-[#4080ff]">¥{product.price}</span>
+            </div>
+          </div>
         </motion.div>
 
-        {/* 商品信息 */}
+        {/* 详细信息 */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mt-6 space-y-4"
+          className="mt-4 space-y-4"
         >
-          <div className="flex items-start justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">{product.name}</h1>
-              <p className="text-sm text-gray-500 mt-1">{product.englishName}</p>
-            </div>
-            <div className="text-xl font-bold text-[#4080ff]">¥{product.price}</div>
-          </div>
-
-          {/* 标签 */}
-          <div className="flex flex-wrap gap-2">
-            {getProductTags(productId || "117").map((tag) => (
-              <span
-                key={tag.id}
-                className={`px-3 py-1 rounded-full text-sm ${tag.backgroundColor} ${tag.color}`}
-              >
-                {tag.name}
-              </span>
-            ))}
-          </div>
-
-          {/* 描述 */}
-          <p className="text-gray-600 leading-relaxed">{product.description}</p>
-
           {/* 风味表 */}
           <FlavorProfile
             data={product.flavor.data}
@@ -112,30 +136,14 @@ const ProductDetailPage: React.FC = () => {
             notes={product.flavor.notes}
           />
 
-          {/* 营养成分 */}
-          <div className="bg-white rounded-xl p-4 shadow-sm space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-900">营养成分</h2>
-              <span className="text-xs text-gray-500">每100ml</span>
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              {Object.entries(product.nutrition).map(([key, value], index) => (
-                <div 
-                  key={key}
-                  className="p-3 rounded-lg bg-gradient-to-br from-blue-50 to-blue-50/50"
-                >
-                  <div className="text-sm text-gray-600">
-                    {key === 'gi' ? 'GI值' :
-                     key === 'calories' ? '热量' :
-                     key === 'protein' ? '蛋白质' :
-                     key === 'transFat' ? '反式脂肪' :
-                     key === 'carbs' ? '碳水' : '脂肪'}
-                  </div>
-                  <div className="text-lg font-semibold text-gray-900 mt-1">{value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* 热量表 */}
+          <CalorieTable
+            coldCalories={product.calories.cold}
+            hotCalories={product.calories.hot}
+          />
+
+          {/* 营养成分表 */}
+          <NutritionTable nutritionData={product.nutrition} />
 
           {/* 推荐搭配 */}
           <div className="bg-white rounded-xl p-4 shadow-sm space-y-4">
@@ -158,20 +166,15 @@ const ProductDetailPage: React.FC = () => {
             </div>
           </div>
         </motion.div>
+      </div>
 
-        {/* 底部操作栏 */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4"
-        >
-          <div className="max-w-2xl mx-auto">
-            <button className="w-full bg-gradient-to-r from-[#4080ff] to-[#3575ff] text-white rounded-xl py-3 font-medium hover:shadow-lg transition-shadow">
-              立即购买
-            </button>
-          </div>
-        </motion.div>
+      {/* 底部操作栏 */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-40">
+        <div className="max-w-2xl mx-auto">
+          <button className="w-full bg-gradient-to-r from-[#4080ff] to-[#3575ff] text-white rounded-xl py-3 font-medium hover:shadow-lg transition-shadow">
+            立即购买
+          </button>
+        </div>
       </div>
     </div>
   );
