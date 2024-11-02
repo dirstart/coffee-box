@@ -16,8 +16,7 @@ const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
   const navigate = useNavigate();
 
   const handleCategoryClick = (categoryId: string) => {
-    // Placeholder for navigation
-    console.log(`Navigating to category: ${categoryId}`);
+    navigate(`/category/${categoryId}`);
   };
 
   return (
