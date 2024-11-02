@@ -5,34 +5,20 @@ export default {
     extend: {
       colors: {
         luckin: {
-          50: '#e6f3ff',
-          100: '#cce7ff',
-          200: '#99cfff',
-          300: '#66b7ff',
-          400: '#339fff',
-          500: '#0087ff',
-          600: '#006ccc',
-          700: '#005199',
-          800: '#003666',
-          900: '#001b33',
+          50: '#f0f7ff',
+          100: '#e0eeff',
+          200: '#baddff',
+          300: '#7cc3ff',
+          400: '#38a8ff',
+          500: '#4080ff',  // Primary color
+          600: '#3575ff',  // Darker shade
+          700: '#1c4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         }
       },
-      animation: {
-        'steam-1': 'steam 2s ease-out infinite',
-        'steam-2': 'steam 2s ease-out infinite',
-        'steam-3': 'steam 2s ease-out infinite',
-        'fill-up': 'fillUp 2s ease-out forwards',
-      },
-      keyframes: {
-        steam: {
-          '0%': { transform: 'translateY(0) scale(1)', opacity: '0' },
-          '50%': { transform: 'translateY(-10px) scale(1.2)', opacity: '0.5' },
-          '100%': { transform: 'translateY(-20px) scale(1)', opacity: '0' },
-        },
-        fillUp: {
-          '0%': { height: '0%' },
-          '100%': { height: '30%' },
-        },
+      boxShadow: {
+        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
       },
     },
   },
