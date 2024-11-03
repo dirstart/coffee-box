@@ -1,7 +1,7 @@
-import React from 'react';
-import { ArrowLeft, Thermometer, Coffee, Flame } from 'lucide-react';
-import { CoffeeRecommendation as CoffeeType } from '../types';
-import { BrewingAnimation } from './BrewingAnimation';
+import React from "react";
+import { ArrowLeft, Thermometer, Coffee, Flame } from "lucide-react";
+import { CoffeeRecommendation as CoffeeType } from "../types";
+import { BrewingAnimation } from "./BrewingAnimation";
 
 interface Props {
   recommendation: CoffeeType;
@@ -18,10 +18,10 @@ export function CoffeeDetails({ recommendation, onBack }: Props) {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
       <div className="relative h-48">
-        <img 
-          src={recommendation.image} 
+        <img
+          src={recommendation.image}
           alt={recommendation.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
         <button
           onClick={handleBack}
@@ -34,12 +34,10 @@ export function CoffeeDetails({ recommendation, onBack }: Props) {
           {recommendation.name}
         </h2>
       </div>
-      
+
       <div className="p-6">
-        <p className="text-luckin-600 mb-6">
-          {recommendation.description}
-        </p>
-        
+        <p className="text-luckin-600 mb-6">{recommendation.description}</p>
+
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="flex items-center space-x-2">
             <Coffee className="w-5 h-5 text-luckin-500" />

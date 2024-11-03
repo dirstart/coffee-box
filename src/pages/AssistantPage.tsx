@@ -102,7 +102,7 @@ const AssistantPage: React.FC = () => {
               >
                 随机推荐
               </button>
-              <AIChat />
+              {/* <AIChat /> */}
             </div>
           </div>
 
